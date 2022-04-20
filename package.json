@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "seed": "node models/seeds/restaurantSeeder.js",
-    "test": "standard && node my-tests.js"
+    "test": "standard && node my-tests.js",
+    "seed": "node models/seeds/shortUrlSeeder.js"
   },
   "keywords": [],
   "author": "",
