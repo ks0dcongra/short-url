@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
+app.use(express.static('public'))
+
 db.on('error', () => {
   console.log('mongodb error!')
 })
@@ -23,6 +25,12 @@ db.once('open', () => {
 app.get('/', (req, res) => {
   res.render('index')
 })
+
+app.get('/success', (req, res) => {
+  res.render('success')
+})
+
+
 
 app.listen(port, (req, res) => {
   // res.send('nice!')
