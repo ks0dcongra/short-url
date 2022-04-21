@@ -4,11 +4,12 @@
   <img class="d-grid gap-2 col-4 mx-auto" src="./shortUrl.png" alt="shortUrl image">
 </div>
 
-<div class="input-group input-group-lg mt-5  mb-3 pt-5 mx-auto">
-  <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-</div>
-
-<div class="d-grid gap-2 col-6 mx-auto mb-3">
-  <button class="btn btn-outline-primary btn-lg" type="button">Button</button>
-</div>
+<form method="POST" action="/">
+  <div class="input-group input-group-lg mt-5  mb-3 pt-5 mx-auto">
+    <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
+    <input type="text" name="url" value="{{options.length}}" class="form-control">
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto mb-3">
+    <button class="btn btn-outline-primary btn-lg" type="submit">Submit</button>
+  </div>
+</form>
