@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 3060
+const port = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const ShortUrl = require('./models/shortUrl')
 const generateShortUrl = require('./generate_shortUrl')
