@@ -2,12 +2,10 @@
 function sample(array) {
   const index = Math.floor(Math.random() * array.length)
   return array[index]
-  // console.log(array[index])
-  // console.log(Math.random() * array.length)
 }
 // sample(collection);
 
-function generateShortUrl(shortURL) {
+function generateShortUrl() {
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
   const upperCaseLetters = lowerCaseLetters.toUpperCase()
   const numbers = '1234567890'
@@ -21,9 +19,10 @@ function generateShortUrl(shortURL) {
   let shortUrlRandomCode = '';
   for (let i = 0; i < 5; i++) {
     shortUrlRandomCode += String(sample(collection))
-    console.log(shortUrlRandomCode)
+    // console.log(shortUrlRandomCode)
   }
   return shortUrlRandomCode
 }
+// 
 
 module.exports = generateShortUrl

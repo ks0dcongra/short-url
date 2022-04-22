@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
 const generateShortUrl = require('./generate_shortUrl')
+const { redirect } = require('express/lib/response')
 // 設定樣本引擎
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
@@ -34,27 +35,34 @@ app.get('/success', (req, res) => {
 
 // 建立shortURL
 app.post('/', (req, res) => {
-  const shortURL = req.body
-  // console.log('random password is: ', shortURL.url)
-  const shortUrl = generateShortUrl()
-  // console.log(shortUrl)
-  res.redirect('/')
-  // return ShortUrl.create(req.body) // 存入資料庫
-  //   .then(() => res.render('success', { shortUrl: shortUrl }))
-  //   .catch(error => console.log(error))
+  let originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
+  let shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
+  const arrUrl = originUrl.concat(shortUrl);
+  const objectUrl = Object.assign({}, ...arrUrl)
+  const shortUrl2 = shortUrl[0].shortUrl
+  return ShortUrl.create(objectUrl)
+    .then(() => res.render('success', { shortUrl: shortUrl2 }))
+    .catch(error => console.log(error))
 })
 
-// 瀏覽單一餐廳
-app.get('/:restaurant_id', (req, res) => {
-  const id = req.params.restaurant_id
-  return Restaurant.findById(id)
+// 使用者輸入短網址後跳轉原網址
+app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
+  const shortUrl = req.params.shortUrl
+  return ShortUrl.find({ shortUrl: shortUrl })
     .lean()
-    .then((restaurant) => res.render('show', { restaurant }))
+    .then(excludeUrl => {
+      let filterexcludeUrl = excludeUrl.filter(Url => {
+        return Url.shortUrl.includes(shortUrl)
+      })
+      filterexcludeUrl = filterexcludeUrl[0].originUrl
+      if (filterexcludeUrl) {
+        res.redirect(filterexcludeUrl)
+      }
+    })
     .catch(error => console.log(error))
 })
 
 app.listen(port, (req, res) => {
-  // res.send('nice!')
   console.log(`App is running on http://localhost:${port}`)
 })
 

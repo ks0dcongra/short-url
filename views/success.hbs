@@ -10,10 +10,11 @@
   </div>
   <div class="w-100 "></div>
   <div class="w-100 col-4 col-md-3 m-2"><a href="#">
-      <h3>http://google.com</h3>
-    </a></div>
+      {{#if shortUrl }}
+      <a>https://todo-listf.herokuapp.com/{{shortUrl}}</a>
+      {{/if}}
+  </div>
   <div class="w-100"></div>
   <div class="w-100 col-4 col-md-3 m-2"><button type=" button" class="btn btn-primary mx-auto btn-lg">Copy
     </button></div>
-
 </div>

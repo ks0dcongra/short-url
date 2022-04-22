@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const ShortUrl = require('../shortUrl')
+
 mongoose.connect('mongodb+srv://alpha:camp@cluster0.ctbuq.mongodb.net/todo-list?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
