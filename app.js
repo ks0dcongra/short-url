@@ -42,6 +42,7 @@ app.post('/', (req, res) => {
   const shortUrl2 = shortUrl[0].shortUrl
   const originUrl2 = originUrl[0].originUrl
 
+  // 輸入相同網址時，產生一樣的縮址。
   ShortUrl.findOne({ originUrl: originUrl2 })
     .then((shortUrl = originUrl.shortUrl))
     .then((shortUrl) => {
