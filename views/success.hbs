@@ -9,12 +9,33 @@
     <h2>Success! Please use this link:</h2>
   </div>
   <div class="w-100 "></div>
-  <div class="w-100 col-4 col-md-2 m-2"><a href="#">
-      {{#if shortUrl }}
-      <a>https://todo-listf.herokuapp.com/{{shortUrl}}</a>
-      {{/if}}
+  <div class="w-100 col-4 col-md-2 m-2" style="display: flex;
+  justify-content: center;">
+    <input type="text" class="form-control" value="https://todo-listf.herokuapp.com/{{shortUrl}}" id="myInputt"
+      disabled="disabled" style="height:40px; width:500px">
   </div>
   <div class="w-100"></div>
-  <div class="w-100 col-4 col-md-2 m-2"><button type=" button" class="btn btn-primary mx-auto btn-lg">Copy
+  <div class="w-100 col-4 col-md-2 m-2"><button onclick="myFunction()" type=" button"
+      class="btn btn-primary mx-auto btn-lg">Copy
     </button></div>
 </div>
+
+
+
+
+<script>
+  function myFunction() {
+    /* Get the text field */
+    var copyText = document.getElementById("myInputt");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
+  }
+</script>

@@ -41,6 +41,7 @@ app.post('/', (req, res) => {
   const objectUrl = Object.assign({}, ...arrUrl)
   const shortUrl2 = shortUrl[0].shortUrl
   return ShortUrl.create(objectUrl)
+    .then((shortUrl2) => console.log(shortUrl2))
     .then(() => res.render('success', { shortUrl: shortUrl2 }))
     .catch(error => console.log(error))
 })
