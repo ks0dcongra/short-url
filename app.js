@@ -37,14 +37,33 @@ app.get('/success', (req, res) => {
 app.post('/', (req, res) => {
   let originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
   let shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
-  const arrUrl = originUrl.concat(shortUrl);
+  const arrUrl = originUrl.concat(shortUrl)
   const objectUrl = Object.assign({}, ...arrUrl)
   const shortUrl2 = shortUrl[0].shortUrl
-  return ShortUrl.create(objectUrl)
-    .then((shortUrl2) => console.log(shortUrl2))
-    .then(() => res.render('success', { shortUrl: shortUrl2 }))
+  const originUrl2 = originUrl[0].originUrl
+
+  ShortUrl.findOne({ originUrl: originUrl2 })
+    .then((shortUrl = originUrl.shortUrl))
+    .then((shortUrl) => {
+      if (shortUrl) {
+        console.log('exist already:', shortUrl.shortUrl)
+        res.render('success', { shortUrl: shortUrl.shortUrl })
+      } else {
+        return ShortUrl.create(objectUrl)
+          .then(console.log('create new one:', shortUrl2))
+          .then(() => res.render('success', { shortUrl: shortUrl2 }))
+          .catch(error => console.log(error))
+      }
+    })
     .catch(error => console.log(error))
+
+
 })
+
+
+
+
+
 
 // 使用者輸入短網址後跳轉原網址
 app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
@@ -62,6 +81,9 @@ app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
     })
     .catch(error => console.log(error))
 })
+
+
+
 
 app.listen(port, (req, res) => {
   console.log(`App is running on http://localhost:${port}`)
