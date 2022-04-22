@@ -75,8 +75,8 @@ npm run dev
 終端顯示 `Express is running on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開始使用程式
 
 ## 系統截圖
-![可輸入網址之首頁](https://github.com/ks0dcongra/reataurant-list/blob/master/public/00.jpg)
-![短網址轉換完之顯示頁](https://github.com/ks0dcongra/reataurant-list/blob/master/public/1.jpg)
+![可輸入網址之首頁](https://github.com/ks0dcongra/short-url/blob/master/public/00.jpg)
+![短網址轉換完之顯示頁](https://github.com/ks0dcongra/short-url/blob/master/public/1.jpg)
 
 
 ## 使用工具
