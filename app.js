@@ -56,7 +56,7 @@ app.post('/', (req, res) => {
 })
 
 // 使用者輸入短網址後跳轉原網址
-app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
+app.get('/shorturl5566.herokuapp.com/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl
   return ShortUrl.find({ shortUrl: shortUrl })
     .lean()
