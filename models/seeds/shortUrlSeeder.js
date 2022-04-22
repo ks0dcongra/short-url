@@ -1,16 +1,12 @@
-const mongoose = require('mongoose')
 const ShortUrl = require('../shortUrl')
+const db = require('../../config/mongoose')
 
-mongoose.connect('mongodb+srv://alpha:camp@cluster0.ctbuq.mongodb.net/todo-list?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
 db.once('open', () => {
   console.log('mongodb connection!')
   for (let i = 0; i < 10; i++) {
-    ShortUrl.create({ name: `name-${i}` })
+    ShortUrl.create({ originUrl: `name-${i}` })
+    ShortUrl.create({ shortUrl: `value-${i}` })
   }
   console.log('done')
 })
+
