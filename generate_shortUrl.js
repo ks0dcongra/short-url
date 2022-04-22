@@ -23,6 +23,5 @@ function generateShortUrl() {
   }
   return shortUrlRandomCode
 }
-// 
 
 module.exports = generateShortUrl

@@ -60,11 +60,6 @@ app.post('/', (req, res) => {
 
 })
 
-
-
-
-
-
 // 使用者輸入短網址後跳轉原網址
 app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl
@@ -82,11 +77,6 @@ app.get('/todo-listf.herokuapp.com/:shortUrl', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-
 app.listen(port, (req, res) => {
   console.log(`App is running on http://localhost:${port}`)
 })
-
-
