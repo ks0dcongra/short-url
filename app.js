@@ -13,11 +13,7 @@ app.set('view engine', 'hbs')
 // bodyParser
 app.use(bodyParser.urlencoded({ extended: true }))
 // 連線資料庫
-
-
 app.use(express.static('public'))
-
-
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -29,30 +25,51 @@ app.get('/success', (req, res) => {
 
 // 建立shortURL
 app.post('/', (req, res) => {
+
   let originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
   let shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
-  const arrUrl = originUrl.concat(shortUrl)
-  const objectUrl = Object.assign({}, ...arrUrl)
-  const shortUrl2 = shortUrl[0].shortUrl
+  let arrUrl = originUrl.concat(shortUrl)
+  let objectUrl = Object.assign({}, ...arrUrl)
+  let shortUrl2 = shortUrl[0].shortUrl
   const originUrl2 = originUrl[0].originUrl
+  let arrExist = []
 
-  // 輸入相同網址時，產生一樣的縮址。
+  // 避免短網址重複
+  ShortUrl.find({})
+    .sort({ _id: -1 })
+    .limit(1)
+    .then((data) => {
+      data = data[0]
+      if (!data) {
+        console.log('first add URL in mongoose')
+        arrExist.push(shortUrl2)
+        objectUrl['arrExist'] = arrExist
+      } else {
+        while (data.arrExist.some((n) => n == shortUrl2)) {
+          console.log('RandomCode exist already:', data.arrExist.some((n) => n == shortUrl2))
+          shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
+          shortUrl2 = shortUrl[0].shortUrl
+        }
+
+        data.arrExist.push(shortUrl2)
+        objectUrl['arrExist'] = data.arrExist
+      }
+    })
+
+  // 輸入相同網址時，產生一樣的短往址。
   ShortUrl.findOne({ originUrl: originUrl2 })
-    .then((shortUrl = originUrl.shortUrl))
-    .then((shortUrl) => {
-      if (shortUrl) {
-        console.log('exist already:', shortUrl.shortUrl)
-        res.render('success', { shortUrl: shortUrl.shortUrl })
+    .then((data) => {
+      if (data) {
+        console.log('URL exist already:', data.shortUrl)
+        res.render('success', { shortUrl: data.shortUrl })
       } else {
         return ShortUrl.create(objectUrl)
-          .then(console.log('create new one:', shortUrl2))
+          .then(console.log('create new one URL:', shortUrl2))
           .then(() => res.render('success', { shortUrl: shortUrl2 }))
           .catch(error => console.log(error))
       }
     })
     .catch(error => console.log(error))
-
-
 })
 
 // 使用者輸入短網址後跳轉原網址

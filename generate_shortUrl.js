@@ -3,7 +3,7 @@ function sample(array) {
   const index = Math.floor(Math.random() * array.length)
   return array[index]
 }
-// sample(collection);
+
 
 function generateShortUrl() {
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
@@ -13,13 +13,11 @@ function generateShortUrl() {
   collection = collection.concat(lowerCaseLetters.split(''))
   collection = collection.concat(upperCaseLetters.split(''))
   collection = collection.concat(numbers.split(''))
-  // console.log(collection)
 
 
   let shortUrlRandomCode = '';
   for (let i = 0; i < 5; i++) {
     shortUrlRandomCode += String(sample(collection))
-    // console.log(shortUrlRandomCode)
   }
   return shortUrlRandomCode
 }
