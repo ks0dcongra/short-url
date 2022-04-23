@@ -82,7 +82,7 @@ npm run dev
 ## 使用工具
 - [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/) - 開發環境
 - [MongoDb](https://www.mongodb.com/atlas/database) - 資料庫
-- [Mongoose](https://mongoosejs.com/) - 在MongoDB和Express Web應用程序框架之間創建連接。
+- [Mongoose](https://mongoosejs.com/) - 在MongoDB和Express Web應用程序框架之間創建連接
 - [Express](https://www.npmjs.com/package/express) - 應用程式架構
 - [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - 模板引擎
 
