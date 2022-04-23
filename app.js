@@ -73,9 +73,9 @@ app.post('/', (req, res) => {
 })
 
 // 使用者輸入短網址後跳轉原網址
-app.get('/shorturl5566.herokuapp.com/:shortUrl', (req, res) => {
+app.get('/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl
-  return ShortUrl.find({ shortUrl: shortUrl })
+  ShortUrl.find({ shortUrl: shortUrl })
     .lean()
     .then(excludeUrl => {
       let filterexcludeUrl = excludeUrl.filter(Url => {
@@ -83,7 +83,7 @@ app.get('/shorturl5566.herokuapp.com/:shortUrl', (req, res) => {
       })
       filterexcludeUrl = filterexcludeUrl[0].originUrl
       if (filterexcludeUrl) {
-        res.redirect(filterexcludeUrl)
+        return res.redirect(filterexcludeUrl)
       }
     })
     .catch(error => console.log(error))
