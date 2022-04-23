@@ -62,7 +62,7 @@ npm i mongoose@5.9.7
 
 9.開啟程式
 ```
-npm run dev 
+npm run 
 ```
 
 10.打開瀏覽器網址列輸入 http://localhost:3000/
