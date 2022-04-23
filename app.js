@@ -5,7 +5,6 @@ const port = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const ShortUrl = require('./models/shortUrl')
 const generateShortUrl = require('./generate_shortUrl')
-const { redirect } = require('express/lib/response')
 require('./config/mongoose')
 // 設定樣本引擎
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
@@ -25,14 +24,13 @@ app.get('/success', (req, res) => {
 
 // 建立shortURL
 app.post('/', (req, res) => {
-
-  let originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
+  const originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
   let shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
-  let arrUrl = originUrl.concat(shortUrl)
-  let objectUrl = Object.assign({}, ...arrUrl)
+  const arrUrl = originUrl.concat(shortUrl)
+  const objectUrl = Object.assign({}, ...arrUrl)
   let shortUrl2 = shortUrl[0].shortUrl
   const originUrl2 = originUrl[0].originUrl
-  let arrExist = []
+  const arrExist = []
 
   // 避免短網址重複
   ShortUrl.find({})
@@ -43,16 +41,16 @@ app.post('/', (req, res) => {
       if (!data) {
         console.log('first add URL in mongoose')
         arrExist.push(shortUrl2)
-        objectUrl['arrExist'] = arrExist
+        objectUrl.arrExist = arrExist
       } else {
-        while (data.arrExist.some((n) => n == shortUrl2)) {
-          console.log('RandomCode exist already:', data.arrExist.some((n) => n == shortUrl2))
+        while (data.arrExist.some((n) => n === shortUrl2)) {
+          console.log('RandomCode exist already:', data.arrExist.some((n) => n === shortUrl2))
           shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
           shortUrl2 = shortUrl[0].shortUrl
         }
 
         data.arrExist.push(shortUrl2)
-        objectUrl['arrExist'] = data.arrExist
+        objectUrl.arrExist = data.arrExist
       }
     })
 
@@ -75,18 +73,22 @@ app.post('/', (req, res) => {
 // 使用者輸入短網址後跳轉原網址
 app.get('/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl
-  ShortUrl.find({ shortUrl: shortUrl })
-    .lean()
-    .then(excludeUrl => {
-      let filterexcludeUrl = excludeUrl.filter(Url => {
-        return Url.shortUrl.includes(shortUrl)
+  if (shortUrl) {
+    ShortUrl.find({ shortUrl })
+      .lean()
+      .then(excludeUrl => {
+        let filterexcludeUrl = excludeUrl.filter(Url => {
+          return Url.shortUrl.includes(shortUrl)
+        })
+        filterexcludeUrl = filterexcludeUrl[0].originUrl
+        console.log(filterexcludeUrl)
+        if (filterexcludeUrl) {
+          return res.redirect(filterexcludeUrl)
+        }
       })
-      filterexcludeUrl = filterexcludeUrl[0].originUrl
-      if (filterexcludeUrl) {
-        return res.redirect(filterexcludeUrl)
-      }
-    })
-    .catch(error => console.log(error))
+      .catch(error => console.log(error))
+  }
+
 })
 
 app.listen(port, (req, res) => {
