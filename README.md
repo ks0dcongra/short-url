@@ -50,27 +50,22 @@ $ nvm list available
 $ nvm use 14.16.0
 ```
 
-7.使用node.js 14.16.0 版
-```
-$ nvm use 14.16.0
-```
-
-8.檢查node.js版本
+7.檢查node.js版本
 ```
 $ node -v
 ```
 
-9.下載mongoose套件
+8.下載mongoose套件
 ```
 npm i mongoose@5.9.7
 ```
 
-10.開啟程式
+9.開啟程式
 ```
 npm run dev 
 ```
 
-11.打開瀏覽器網址列輸入 http://localhost:3000/
+10.打開瀏覽器網址列輸入 http://localhost:3000/
 
 終端顯示 `Express is running on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開始使用程式
 
