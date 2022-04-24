@@ -37,7 +37,7 @@ npm run start
 終端顯示 `Express is running on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開始使用程式
 
 
-## 如果步驟三不能執行再執行步驟四跟五跟七，最後在執行步驟四 npm run start
+## 如果步驟三不能執行再執行步驟五跟六跟七，最後在執行步驟四 npm run start
 
 5.下載 express-handlebars
 ```
