@@ -11,7 +11,7 @@
   <div class="w-100 "></div>
   <div class="w-100 col-4 col-md-2 m-2" style="display: flex;
   justify-content: center;">
-    <input type="text" class="form-control" value="http://localhost:3000/{{shortUrl}}" id="myInputt" disabled="disabled"
+    <input type="text" class="form-control" value="http://localhost:3000/project/{{shortUrl}}" id="myInput"
       style="height:40px; width:500px">
   </div>
   <div class="w-100"></div>
@@ -23,7 +23,7 @@
 <script>
   function myFunction() {
     /* Get the text field */
-    var copyText = document.getElementById("myInputt");
+    var copyText = document.getElementById("myInput");
 
     /* Select the text field */
     copyText.select();
@@ -33,6 +33,6 @@
     navigator.clipboard.writeText(copyText.value);
 
     /* Alert the copied text */
-    alert("Copied the text: " + copyText.value);
+    alert("Copied the URL: " + copyText.value);
   }
 </script>
