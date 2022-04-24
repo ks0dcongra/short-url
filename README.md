@@ -26,27 +26,38 @@ git clone https://github.com/ks0dcongra/short-url.git
 ```
 cd short-url
 ```
-3.下載express
+
+3.開啟程式
+```
+npm run start
+```
+
+4.打開瀏覽器網址列輸入 http://localhost:3000/
+
+終端顯示 `Express is running on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開始使用程式
+
+
+## 如果步驟三不能執行再執行步驟四跟五跟七，最後在執行步驟四 npm run start
+
+5.下載 express-handlebars
+```
+npm install express-handlebars
+```
+
+6.下載 express
 ```
 npm install express
 ```
 
-4.下載mongoose套件
+7.下載 mongoose套件
 ```
 npm install mongoose
 ```
 
-5.開啟程式
-```
-npm run 
-```
 
-6.打開瀏覽器網址列輸入 http://localhost:3000/
-
-終端顯示 `Express is running on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開始使用程式
 
 ## 系統截圖
-![可輸入網址之首頁](https://github.com/ks0dcongra/short-url/blob/master/public/00.jpg)
+![可輸入網址之首頁](https://github.com/ks0dcongra/short-url/blob/master/public/0.jpg)
 ![短網址轉換完之顯示頁](https://github.com/ks0dcongra/short-url/blob/master/public/1.jpg)
 
 
