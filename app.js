@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const ShortUrl = require('./models/shortUrl')
-const generateShortUrl = require('./generateShortUrl')
-const tryHttp = require('./tryHttp')
+const generateShortUrl = require('./utils/generateShortUrl')
+const tryHttp = require('./utils/tryHttp')
 // const { redirect } = require('express/lib/response')
 require('./config/mongoose')
 // 設定樣本引擎
@@ -30,7 +30,7 @@ app.post('/', (req, res) => {
   const arrUrl = originUrl.concat(shortUrl)
   // 整合成物件，以便資料庫建立(Create)的時候可以使用
   const objectUrl = Object.assign({}, ...arrUrl)
-  // 宣告陣列，當創建完資料後會存入資料庫，當要進行網址是否有重複的判斷時，會將資料庫最近一筆的陣列抓下來尋覽是否有重複。
+  // 宣告陣列，當創建完資料後會將陣列存入資料庫，當要進行網址是否有重複的判斷時，會將資料庫最近一筆的陣列抓下來尋覽是否有重複。
   const arrExist = []
 
   // 進行網址開頭是否為http://||https://的判斷
