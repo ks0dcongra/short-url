@@ -1,7 +1,7 @@
 // 判斷輸入的開頭是否為http:// 或 https://
 try {
   function tryHttp(data) {
-    const regExp = '^http\:\/\/|https\:\/\/'
+    const regExp = '(^http\:\/\/|^https\:\/\/)(.)+'
     const result = data.match(regExp)
     if (!result) {
       return false
