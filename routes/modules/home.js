@@ -40,6 +40,7 @@ router.post('/', (req, res) => {
         objectUrl.arrExist = arrExist
       } else { // 如果從資料庫找出已有重複的短網址便再生呼叫generateShortUrl()生成一次短網址
         data = data[0]
+        console.log(data)
         while (data.arrExist.some((n) => n === shortUrl2)) {
           console.log('RandomCode exist already:', data.arrExist.some((n) => n === shortUrl2))
           shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
