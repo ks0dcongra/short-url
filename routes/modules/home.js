@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     return res.redirect('/')
   }
   // 先判斷資料庫是否有重複的網址如果有的話就在進行一次生成短網址的動作
-  ShortUrl.find({})
+  ShortUrl.findOne({})
     // 避免短網址重複，只抓最新的一筆
     .sort({ _id: -1 })
     .limit(1)
