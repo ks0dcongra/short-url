@@ -34,19 +34,19 @@ router.post('/', (req, res) => {
     .limit(1)
     // 印出最新第一筆的儲存短網址物件
     .then((data) => {
-      // 判斷現在資料庫有沒有資料
+      // 判斷現在資料庫有沒有資料，如果沒有就直接處理好的陣列加入物件
       if (Object.keys(data).length === 0) {
         console.log('first add URL in mongoose')
         arrExist.push(shortUrl2)
         objectUrl.arrExist = arrExist
-      } else { // 如果從資料庫找出已有重複的短網址便再生呼叫generateShortUrl()生成一次短網址
+      } else { // 如果資料庫有資料
         data = data[0]
         console.log(data)
-        while (data.arrExist.some((n) => n === shortUrl2)) {
+        while (data.arrExist.some((n) => n === shortUrl2)) {  // 需要判斷資料庫是否重複的短網址，若有便在呼叫generateShortUrl()生成一次短網址
           console.log('RandomCode exist already:', data.arrExist.some((n) => n === shortUrl2))
           shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
           shortUrl2 = shortUrl[0].shortUrl
-        }
+        } // 如果沒有重複的短網址便將漿處理好的陣列加入物件
         data.arrExist.push(shortUrl2)
         objectUrl.arrExist = data.arrExist
       }
