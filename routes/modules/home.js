@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
       } else { // 如果資料庫有資料
         data = data[0]
         console.log(data)
-        while (data.arrExist.some((n) => n === shortUrl2)) {  // 需要判斷資料庫是否重複的短網址，若有便在呼叫generateShortUrl()生成一次短網址
+        while (data.arrExist.some((n) => n === shortUrl2)) { // 需要判斷資料庫是否重複的短網址，若有便在呼叫generateShortUrl()生成一次短網址
           console.log('RandomCode exist already:', data.arrExist.some((n) => n === shortUrl2))
           shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
           shortUrl2 = shortUrl[0].shortUrl
