@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
   if (!tryHttp(originUrl2)) {
     return res.render('fail')
   }
+
   // 先判斷資料庫是否有重複的網址如果有的話就在進行一次生成短網址的動作
   ShortUrl.find({})
     // 避免短網址重複，只抓最新的一筆
