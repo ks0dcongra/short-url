@@ -24,10 +24,10 @@ router.post('/', (req, res) => {
 
   // 進行網址開頭是否為http://||https://的判斷
   if (!tryHttp(originUrl2)) {
-    return res.redirect('/')
+    return res.render('fail')
   }
   // 先判斷資料庫是否有重複的網址如果有的話就在進行一次生成短網址的動作
-  ShortUrl.findOne({})
+  ShortUrl.find({})
     // 避免短網址重複，只抓最新的一筆
     .sort({ _id: -1 })
     .limit(1)
