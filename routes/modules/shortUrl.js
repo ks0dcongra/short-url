@@ -1,7 +1,6 @@
 // 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-
 const ShortUrl = require('../../models/shortUrl')
 
 // 使用者輸入短網址後跳轉原網址

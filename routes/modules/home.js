@@ -10,15 +10,16 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  // 將資料變成陣列，陣列裡有字串
+  // 將資料變成陣列，陣列裡有物件
   let shortUrl = generateShortUrl().split().map(Url => ({ shortUrl: Url }))
-  let shortUrl2 = shortUrl[0].shortUrl
   const originUrl = req.body.url.split().map(Url => ({ originUrl: Url }))
-  const originUrl2 = originUrl[0].originUrl
   // 連接前處理完的陣列
   const arrUrl = originUrl.concat(shortUrl)
   // 整合成物件，以便資料庫建立(Create)的時候可以使用
   const objectUrl = Object.assign({}, ...arrUrl)
+  // 將物件取出陣列，並讀出物件的key
+  let shortUrl2 = shortUrl[0].shortUrl
+  const originUrl2 = originUrl[0].originUrl
   // 宣告陣列，當創建完資料後會將陣列存入資料庫，當要進行網址是否有重複的判斷時，會將資料庫最近一筆的陣列抓下來尋覽是否有重複。
   const arrExist = []
 
