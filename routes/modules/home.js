@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-
   // 進行網址開頭是否為http://||https://的判斷
   if (!tryHttp(req.body.url)) {
     return res.render('fail')
@@ -26,11 +25,11 @@ router.post('/', (req, res) => {
       } else {
         // 回傳Promise[pending]用async,await的方式接收，會直接轉變為 字串(短網址)，就能直接接收查詢。
         create()
-        async function create() {
-          let shortUrl = await generateShortUrl()
-          ShortUrl.create({ shortUrl: shortUrl, originUrl: req.body.url })
+        async function create () {
+          const shortUrl = await generateShortUrl()
+          ShortUrl.create({ shortUrl, originUrl: req.body.url })
             .then(console.log('create new one URL:', shortUrl))
-            .then(() => res.render('success', { shortUrl: shortUrl }))
+            .then(() => res.render('success', { shortUrl }))
             .catch(error => console.log(error))
         }
       }
