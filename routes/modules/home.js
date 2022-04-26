@@ -42,7 +42,11 @@ router.get('/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl
   ShortUrl.findOne({ shortUrl })
     .lean()
-    .then((data) => { return res.redirect(data.originUrl) })
+    .then((data) => {
+      if (shortUrl !== 'favicon.ico') {
+        return res.redirect(data.originUrl)
+      }
+    })
     .catch(error => console.log(error))
 })
 

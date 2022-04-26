@@ -27,6 +27,7 @@ function generateShortUrl () {
         return shortUrlRandomCode
       }
     })
+
   return shortUrl
 }
 
