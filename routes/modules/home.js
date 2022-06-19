@@ -25,13 +25,52 @@ router.post('/', (req, res) => {
       } else {
         // 回傳Promise[pending]用async,await的方式接收，會直接轉變為 字串(短網址)，就能直接接收查詢。
         create()
-        async function create () {
+        async function create() {
           const shortUrl = await generateShortUrl()
           ShortUrl.create({ shortUrl, originUrl: req.body.url })
             .then(console.log('create new one URL:', shortUrl))
             .then(() => res.render('success', { shortUrl }))
             .catch(error => console.log(error))
         }
+        //try catch 寫法
+        // try {
+        //   const shortUrl = await generateShortUrl()
+        //   const url = ShortUrl.create({ shortUrl, originUrl: req.body.url })
+        //   if (url) {
+        //     console.log('create new one URL:', shortUrl)
+        //     res.render('success', { shortUrl })
+        //   }
+        // } catch (error) {
+        //   console.log(error)
+        // }
+        // ===
+        // create()
+        // function parameterWhile(shortUrl) {
+        //   ShortUrl.find({ shortUrl: shortUrl })
+        //     .then(data => {
+        //       console.log('oo', data)
+        //       if (data[0].shortUrl == shortUrl) {
+        //         console.log('true')
+        //         return 'true'
+        //       }
+        //       else {
+        //         return 'false'
+        //       }
+        //     })
+        //     .catch(error => console.log(error))
+        // }
+        // console.log('parameteBoolean0', parameterWhile(hhghh))
+        // async function create() {
+        //   let shortUrl = await generateShortUrl()
+        //   console.log('shortUrlL', shortUrl)
+        //   let parameteBoolean = await parameterWhile(shortUrl)
+        //   console.log('parameteBoolean', parameteBoolean)
+        // while (parameteBoolean) {
+        //   console.log('while loop')
+        //   shortUrl = generateShortUrl()
+        //   parameterWhile(shortUrl)
+        // }
+        // }
       }
     })
     .catch(error => console.log(error))
